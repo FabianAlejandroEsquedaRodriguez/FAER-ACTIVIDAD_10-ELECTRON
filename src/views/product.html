@@ -1,0 +1,53 @@
+<!--Ventana del poducto-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADD NEW PRODUCT</title>
+    <link rel="stylesheet" href="https://bootswatch.com/5/superhero/bootstrap.min.css">
+
+</head>
+<body>
+    
+    <form class="p-5 text-center">
+        <div class="form-group mb-3">
+            <input type="text" id="name" class="form-control" placeholder="Product's name" autofocus>
+        </div>
+        <div class="form-group mb-3">
+            <input type="text" id="price" class="form-control" placeholder="Price">
+        </div>
+        <div class="form-group mb-3">
+            <input type="text" id="description" class="form-control" placeholder="Description">
+        </div>
+        <button class="btn btn-primary btn-block">SAVE PRODUCT</button>
+    </form>
+
+    <script>
+        const { ipcRenderer } = require('electron');
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', e => {
+                
+            const nameProduct = document.querySelector('#name').value;//Obtener el valor de lo que se escribe en el input
+            const priceProduct = document.querySelector('#price').value;//Obtener el valor de lo que se escribe en el input
+            const descProduct = document.querySelector('#description').value;//Obtener el valor de lo que se escribe en el input
+                
+            // console.log(nameProduct, priceProduct, descProduct);
+            
+            const newProduct = {
+                name: nameProduct,
+                price: priceProduct,
+                description: descProduct
+            }
+                
+            //Evento product:new y pasamos lo que sea que el usuario haya puesto
+            ipcRenderer.send('product:new', newProduct);
+            
+            e.preventDefault();
+        });
+    </script>
+
+</body>
+</html>
