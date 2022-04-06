@@ -1,10 +1,8 @@
 # FAER-ACTIVIDAD_10-ELECTRON
 Actividad de la clase de programación para internet (Sección D03)
 
-El archivo ejecutable de la aplicación se ecuentra dentro de la carpeta "release_builds" y "my-app-win32-ia32".
-Carpetas y archivos que se genera al momento de poner el comando "npm run package-win" en la linea de comandos.
-
-![image](https://user-images.githubusercontent.com/70966003/161885076-3273f544-cef0-4def-b68c-7f862179bf28.png)
+Hay que hacer unas cuantas modificaciones para poder generar el archivo ejecutable.
+Una de ellas, es modificar el package.json
 
 El archivo "package.json" debería lucir algo así:
 ![image](https://user-images.githubusercontent.com/70966003/161884891-64643b6a-6bdb-42ed-8cef-70c499eb1358.png)
@@ -14,6 +12,15 @@ Las líneas de código dentro del "scripts" son las siguientes, modificando "my-
 "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
 "package-win": "electron-packager . my-app --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Electron App\"",    
 "package-linux": "electron-packager . my-app --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds"
+
+La otra es modificar el main.js, borrando o comentando las líneas donde se haga uso de electron-reload:
+
+![image](https://user-images.githubusercontent.com/70966003/161889824-cd8640fb-2d64-45a0-9846-0761fbc20b4e.png)
+
+El archivo ejecutable de la aplicación se ecuentra dentro de la carpeta "release_builds" y "my-app-win32-ia32".
+Carpetas y archivos que se genera al momento de poner el comando "npm run package-win" en la linea de comandos.
+
+![image](https://user-images.githubusercontent.com/70966003/161885076-3273f544-cef0-4def-b68c-7f862179bf28.png)
 
 La aplicación corriendo se ve algo así:
 ![image](https://user-images.githubusercontent.com/70966003/161885296-eae08205-2a0a-4868-b765-56a9c4f87a1e.png)
